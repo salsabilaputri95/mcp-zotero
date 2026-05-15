@@ -15,6 +15,7 @@ Server MCP (Model Context Protocol) untuk integrasi Zotero dengan AI berbasis Py
 - [Konfigurasi](#konfigurasi)
 - [Tools Tersedia](#tools-tersedia)
 - [Cara Penggunaan](#cara-penggunaan)
+- [Cara Penggunaan via Claude Desktop](#via-claude-desktop)
 - [Struktur Project](#struktur-project)
 
 ---
@@ -244,6 +245,38 @@ Ekstrak outline (daftar isi) dari PDF attachment.
    ```
    Gunakan tool zotero_search_items untuk cari artikel tentang "machine learning"
    ```
+
+### Via Claude Desktop
+
+1. **Buka file konfigurasi Claude Desktop**
+   - Windows (Microsoft Store): `C:\Users\<username>\AppData\Local\Packages\Claude_pzs8sxrjxfjjc\LocalCache\Roaming\Claude\claude_desktop_config.json`
+   - Windows (installer biasa): `C:\Users\<username>\AppData\Roaming\Claude\claude_desktop_config.json`
+
+2. **Tambahkan server MCP berikut**
+   ```json
+   {
+     "mcpServers": {
+       "mcp-zotero": {
+         "command": "python",
+         "args": ["-m", "mcp_zotero"],
+         "cwd": "D:\\mcp\\mcp-with-claude"
+       }
+     }
+   }
+   ```
+
+3. **Simpan file lalu restart Claude Desktop sepenuhnya**
+   - Tutup semua jendela Claude Desktop
+   - Buka lagi aplikasinya
+
+4. **Uji koneksi**
+   - Jalankan perintah uji di terminal: `python -m mcp_zotero --doctor`
+   - Jika sukses, minta Claude menjalankan tool, contoh: cari item Zotero terbaru
+
+5. **Jika Claude Desktop langsung disconnect**
+   - Pastikan `python -m mcp_zotero --doctor` berjalan tanpa error
+   - Pastikan path `cwd` benar-benar ada
+   - Pastikan konfigurasi `.env` sudah diisi (minimal `ZOTERO_API_KEY` dan `ZOTERO_LIBRARY_ID`)
 
 ### Via Command Line (Direct)
 
