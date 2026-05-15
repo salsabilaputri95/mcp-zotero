@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "mcp-zotero": {
+      "command": "python",
+      "args": ["-m", "mcp_zotero"],
+      "cwd": ".."
+    }
+  }
+}
